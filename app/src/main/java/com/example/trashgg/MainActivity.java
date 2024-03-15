@@ -1,24 +1,41 @@
-package com.example.trashgg;
-
+package com.example.trashgg;// MainActivity.java
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.view.View;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        Button startGameButton = findViewById(R.id.startGameButton);
+        Button instructionsButton = findViewById(R.id.instructionsButton);
+
+        // Set onClickListener for Start Game Button
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to start game activity
+                Intent startGameIntent = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(startGameIntent);
+            }
         });
+
+        // Set onClickListener for Instructions Button
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to show instructions activity
+                Intent instructionsIntent = new Intent(MainActivity.this, instractionsActivity.class);
+                startActivity(instructionsIntent);
+            }
+        });
+
+        // Set onClickListener for Chart Button
+
     }
 }
