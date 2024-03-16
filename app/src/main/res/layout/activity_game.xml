@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <ImageView
+        android:id="@+id/orangeBinImage"
+        android:layout_width="139dp"
+        android:layout_height="203dp"
+        app:srcCompat="@drawable/orengebin"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="485dp" />
+
+    <ImageView
+        android:id="@+id/blueBinImage"
+        android:layout_width="200dp"
+        android:layout_height="203dp"
+        app:srcCompat="@drawable/bluebin"
+        tools:layout_editor_absoluteX="181dp"
+        tools:layout_editor_absoluteY="82dp" />
+
+    <ImageView
+        android:id="@+id/brownBinImage"
+        android:layout_width="139dp"
+        android:layout_height="203dp"
+        app:srcCompat="@drawable/brownbin"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="302dp" />
+
+    <ImageView
+        android:id="@+id/purpleBinImage"
+        android:layout_width="139dp"
+        android:layout_height="203dp"
+        app:srcCompat="@drawable/purplebin"
+        tools:layout_editor_absoluteX="256dp"
+        tools:layout_editor_absoluteY="494dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
