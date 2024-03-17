@@ -1,9 +1,12 @@
 package com.example.trashgg;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
     ImageButton[] b1;
@@ -27,7 +32,10 @@ public class GameActivity extends AppCompatActivity {
     Garbage glass;
     Garbage paper;
     Garbage organic;
+    TextView countdownTimer;
+    CountDownTimer timer;
     int i;
+    int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +68,13 @@ public class GameActivity extends AppCompatActivity {
             brownBinImage = (ImageButton) findViewById(R.id.brownBinImage);
             organic = new Garbage("organic");
             brownBin = new  RecyclingBin(brownBinImage,"brown", organic);
-            b1[0] = brownBinImage;
-            b1[1] = blueBinImage;
-            b1[2] = purpleBinImage;
-            b1[3] = orangeBinImage;
 
-            b2[0] = brownBin;
-            b2[1] = blueBin;
-            b2[2] = purpleBin;
-            b2[3] = orangeBin;
+            countdownTimer =findViewById(R.id.countdown_timer);
+            startTime();
 
-            //פעולה המפעילה על כל פח שלחצו עליו את הפעולה ifRecycler עם הזבל שמוצג על המסך
+
+
+
 
 
             brownBinImage.setOnClickListener(new View.OnClickListener() {
@@ -102,12 +106,36 @@ public class GameActivity extends AppCompatActivity {
             return insets;
         });
     }
-    public void binPrassed(RecyclingBin b) {
+    public void binPrassed(RecyclingBin b) {//פעולה המפעילה על כל פח שלחצו עליו את הפעולה ifRecycler עם הזבל שמוצג על המסך
         if (b.ifRecycler(glass)) {
             Toast.makeText(GameActivity.this, "Good job", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(GameActivity.this, "Try again", Toast.LENGTH_SHORT).show();
+            count = count+5;
         }
+    }
+
+    private void startTime()
+    {
+        timer = new CountDownTimer(60000,1000) {
+            @Override
+            public void onTick(long l) {
+                long minutes = ((l/1000)%3600)/60;
+                long seconds = ((l/1000)%60);
+                    String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, (seconds-count));
+                    countdownTimer.setText(timeFormatted);
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                countdownTimer.setText("00:00");
+                Intent gameIntent = new Intent(GameActivity.this, GameOverActivity.class);
+                startActivity(gameIntent);
+
+            }
+        }.start();
     }
 
 
