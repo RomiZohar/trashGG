@@ -1,7 +1,6 @@
 package com.example.trashgg;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -36,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
     CountDownTimer timer;
     int i;
     int count;
+    int counter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +107,18 @@ public class GameActivity extends AppCompatActivity {
         });
     }
     public void binPrassed(RecyclingBin b) {//פעולה המפעילה על כל פח שלחצו עליו את הפעולה ifRecycler עם הזבל שמוצג על המסך
+        counter=counter+1;
         if (b.ifRecycler(glass)) {
+            if(counter==1)
+            {
+               count = count+3;
+            }
             Toast.makeText(GameActivity.this, "Good job", Toast.LENGTH_SHORT).show();
+            counter=0;
         } else {
             Toast.makeText(GameActivity.this, "Try again", Toast.LENGTH_SHORT).show();
-            count = count-5;
-            count+= 1;
+            count = count -5;
+            count += 1;
         }
     }
 
@@ -122,20 +128,18 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 long minutes = ((l/1000)%3600)/60;
-                long seconds = ((l/1000)%60)+count;
+                long seconds = ((l/1000)%60)+ count;
                 if((seconds) < 0)
                 {
                     seconds = 0;
                 }
-                    String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, (seconds));
+                    String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
                     if((seconds) == 0)
                     {
                        countdownTimer.setText("00:00");
                        onFinish();
                     }
                     countdownTimer.setText(timeFormatted);
-
-
 
             }
 
