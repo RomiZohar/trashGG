@@ -17,8 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
-    ImageButton[] b1;
-    RecyclingBin[] b2;
+    //ImageButton[] b1;
+    //RecyclingBin[] b2;
+    ImageButton stopButton;
     ImageButton orangeBinImage;
     ImageButton purpleBinImage;
     ImageButton blueBinImage;
@@ -33,9 +34,11 @@ public class GameActivity extends AppCompatActivity {
     Garbage organic;
     TextView countdownTimer;
     CountDownTimer timer;
-    int i;
     int count;
     int counter=0;
+    public long timeLeft=60000;
+    long seconds;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,8 @@ public class GameActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-            b1 = new ImageButton[4];
-            b2 = new RecyclingBin[4];
+            //b1 = new ImageButton[4];
+            //b2 = new RecyclingBin[4];
 
             orangeBinImage = (ImageButton) findViewById(R.id.orangeBinImage);
             packaging = new Garbage("packaging");
@@ -72,9 +75,15 @@ public class GameActivity extends AppCompatActivity {
             countdownTimer =findViewById(R.id.countdown_timer);
             startTime();
 
+            stopButton = (ImageButton) findViewById(R.id.stopButton);
 
+            stopButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openStopWindow();
 
-
+                }
+            });
 
 
             brownBinImage.setOnClickListener(new View.OnClickListener() {
@@ -124,34 +133,47 @@ public class GameActivity extends AppCompatActivity {
 
     private void startTime()
     {
-        timer = new CountDownTimer(60000,1000) {
+        timer = new CountDownTimer(timeLeft,1000) {
             @Override
             public void onTick(long l) {
-                long minutes = ((l/1000)%3600)/60;
-                long seconds = ((l/1000)%60)+ count;
-                if((seconds) < 0)
+                seconds = ((l/ 1000)+count);
+                if ((seconds) < 0)
                 {
                     seconds = 0;
                 }
-                    String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-                    if((seconds) == 0)
-                    {
-                       countdownTimer.setText("00:00");
-                       onFinish();
-                    }
-                    countdownTimer.setText(timeFormatted);
+                String timeFormatted = String.format(Locale.getDefault(), "%02d", seconds);
+                if ((seconds) == 0)
+                {
+                    onFinish();
+                }
+                countdownTimer.setText(timeFormatted);
 
             }
 
             @Override
             public void onFinish() {
-                countdownTimer.setText("00:00");
-                Intent gameIntent = new Intent(GameActivity.this, GameOverActivity.class);
-                startActivity(gameIntent);
-
+                if (seconds > 0) {
+                    timeLeft = seconds*1000;
+                    count = 0;
+                    startTime();
+                }
+                else
+                {
+                    countdownTimer.setText("00");
+                    Intent gameIntent = new Intent(GameActivity.this, GameOverActivity.class);
+                    startActivity(gameIntent);
+                }
             }
+
         }.start();
     }
+
+    private void openStopWindow()
+    {
+        Intent stopwindowIntent = new Intent(GameActivity.this, StopWindow.class );
+        startActivity(stopwindowIntent);
+    }
+
 
 
 
