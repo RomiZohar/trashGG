@@ -36,8 +36,9 @@ public class GameActivity extends AppCompatActivity {
     CountDownTimer timer;
     int count;
     int counter=0;
-    public long timeLeft=60000;
-    long seconds;
+    private long timeLeft=60000;
+    private long seconds;
+    boolean timeRunning=true;
 
 
     @Override
@@ -136,17 +137,17 @@ public class GameActivity extends AppCompatActivity {
         timer = new CountDownTimer(timeLeft,1000) {
             @Override
             public void onTick(long l) {
-                seconds = ((l/ 1000)+count);
-                if ((seconds) < 0)
-                {
-                    seconds = 0;
+                if(timeRunning) {
+                    seconds = ((l / 1000) + count);
+                    if ((seconds) < 0) {
+                        seconds = 0;
+                    }
+                    String timeFormatted = String.format(Locale.getDefault(), "%02d", seconds);
+                    if ((seconds) == 0) {
+                        onFinish();
+                    }
+                    countdownTimer.setText(timeFormatted);
                 }
-                String timeFormatted = String.format(Locale.getDefault(), "%02d", seconds);
-                if ((seconds) == 0)
-                {
-                    onFinish();
-                }
-                countdownTimer.setText(timeFormatted);
 
             }
 
@@ -166,12 +167,20 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }.start();
+        timeRunning= true;
+    }
+
+    public void stopTimer()
+    {
+        timer.cancel();
+        timeRunning=false;
     }
 
     private void openStopWindow()
     {
         Intent stopwindowIntent = new Intent(GameActivity.this, StopWindow.class );
         startActivity(stopwindowIntent);
+        stopTimer();
     }
 
 
