@@ -3,7 +3,9 @@ package com.example.trashgg;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class StopWindow extends AppCompatActivity {
+    Button resumeButton;
+    Button restartButton;
+    Button exitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,17 @@ public class StopWindow extends AppCompatActivity {
             params.x =0;
             params.y=-20;
             getWindow().setAttributes(params);
+
+            resumeButton = findViewById(R.id.resumeGameButton);
+            restartButton = findViewById(R.id.restartGameButton);
+            exitButton = findViewById(R.id.exitGameButton);
+
+            resumeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
             return insets;
         });
     }

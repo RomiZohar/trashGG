@@ -38,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
     int counter=0;
     private long timeLeft=60000;
     private long seconds;
-    boolean timeRunning=true;
+    public boolean timeRunning=true;
 
 
     @Override
@@ -179,6 +179,7 @@ public class GameActivity extends AppCompatActivity {
     private void openStopWindow()
     {
         Intent stopwindowIntent = new Intent(GameActivity.this, StopWindow.class );
+        stopwindowIntent.putExtra(String.valueOf(timeRunning), timeRunning);
         startActivity(stopwindowIntent);
         stopTimer();
     }
