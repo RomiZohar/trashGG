@@ -1,9 +1,11 @@
 package com.example.trashgg;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,10 +41,13 @@ public class GameActivity extends AppCompatActivity {
     int counter=0;
     int pointsCount=0;
     private long timeLeft=60000;
-    private long seconds;
-    public static boolean timeRunning=true;
+    private long seconds2;
+    public static boolean timeRunning = false;
 
     public static final String EXTRA_SCORE ="score";
+
+    Dialog myDialog;
+
 
 
     @Override
@@ -53,6 +58,10 @@ public class GameActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+
+            myDialog= new Dialog(this);
+
 
             //b1 = new ImageButton[4];
             //b2 = new RecyclingBin[4];
@@ -78,16 +87,19 @@ public class GameActivity extends AppCompatActivity {
             brownBin = new  RecyclingBin(brownBinImage,"brown", organic);
 
             countdownTimer =findViewById(R.id.countdown_timer);
-            stopTimer();
 
             stopButton = (ImageButton) findViewById(R.id.stopButton);
 
             points = findViewById(R.id.points);
 
+            startTime();
+
+
+
+
             stopButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     openStopWindow();
 
                 }
@@ -149,33 +161,40 @@ public class GameActivity extends AppCompatActivity {
             timer = new CountDownTimer(timeLeft, 1000) {
                 @Override
                 public void onTick(long l) {
-                    seconds = ((l / 1000) + count);
-                    if ((seconds) < 0) {
-                        seconds = 0;
+                    if(!myDialog.isShowing()) {
+                        long seconds = ((l / 1000) + count);
+                        if ((seconds) < 0) {
+                            seconds = 0;
+                        }
+                        seconds2 = seconds;
+                        String timeFormatted = String.format(Locale.getDefault(), "%02d", seconds);
+                        if (seconds == 0) {
+                            cancel();
+                            onFinish();
+                        }
+                        countdownTimer.setText(timeFormatted);
                     }
-                    String timeFormatted = String.format(Locale.getDefault(), "%02d", seconds);
-                    if (seconds==0) {
+                    else {
                         cancel();
-                        onFinish();
                     }
-                    countdownTimer.setText(timeFormatted);
                 }
 
 
                 @Override
                 public void onFinish() {
-                    if (seconds > 0) {
-                        timeLeft = seconds * 1000;
+
+                    if (seconds2 > 0) {
+                        timeLeft = seconds2 * 1000;
                         count = 0;
                         startTime();
-                    }
-
+                    } else {
                         countdownTimer.setText("00");
                         String score = points.getText().toString();
                         Intent gameIntent = new Intent(GameActivity.this, GameOverActivity.class);
-                        gameIntent.putExtra(EXTRA_SCORE,score);
+                        gameIntent.putExtra(EXTRA_SCORE, score);
                         startActivity(gameIntent);
                     }
+                }
 
 
             }.start();
@@ -183,20 +202,70 @@ public class GameActivity extends AppCompatActivity {
         }
 
 
-    public void stopTimer()
-    {
-        if(!timeRunning) {
-            timer.cancel();
-        }
-        else {
-            startTime();
-        }
+
+
+
+    private void openStopWindow() {
+        Button resumeButton;
+        Button restartButton;
+        Button exitButton;
+
+        myDialog.setContentView(R.layout.activity_stop_window);
+        resumeButton = myDialog.findViewById(R.id.resumeGameButton);
+        restartButton = myDialog.findViewById(R.id.restartGameButton);
+        exitButton = myDialog.findViewById(R.id.exitGameButton);
+
+        resumeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+                timeLeft = seconds2 * 1000;
+                startTime();
+            }
+        });
+        restartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent restartIntant = getIntent();
+                startActivity(restartIntant);
+
+            }
+        });
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent exitIntant = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(exitIntant);
+
+            }
+        });
+
+        myDialog.show();
     }
 
-    private void openStopWindow()
+
+        //Intent stopwindowIntent = new Intent(GameActivity.this, StopWindow.class );
+
+       // startActivity(stopwindowIntent);
+
+    public void stopTimer()
     {
-        Intent stopwindowIntent = new Intent(GameActivity.this, StopWindow.class );
-        startActivity(stopwindowIntent);
+        timer.cancel();
+        timeRunning=false;
+
+    }
+
+    public void startStop()
+    {
+        if(timeRunning)
+        {
+            stopTimer();
+        }
+        else
+        {
+
+            startTime();
+        }
     }
 
 
