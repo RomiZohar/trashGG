@@ -1,7 +1,9 @@
 package com.example.trashgg;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -34,9 +36,11 @@ public class GameActivity extends AppCompatActivity {
     Garbage glass;
     Garbage paper;
     Garbage organic;
-    TextView countdownTimer;
     TextView points;
+    TextView countdownTimer;
+    TextView countdown3;
     CountDownTimer timer;
+    CountDownTimer timer3;
     int count;
     int counter=0;
     int pointsCount=0;
@@ -87,12 +91,13 @@ public class GameActivity extends AppCompatActivity {
             brownBin = new  RecyclingBin(brownBinImage,"brown", organic);
 
             countdownTimer =findViewById(R.id.countdown_timer);
+            countdown3 = findViewById(R.id.countdown3);
 
             stopButton = (ImageButton) findViewById(R.id.stopButton);
 
             points = findViewById(R.id.points);
+            start3count();
 
-            startTime();
 
 
 
@@ -134,6 +139,26 @@ public class GameActivity extends AppCompatActivity {
 
             return insets;
         });
+    }
+    public void start3count()//בזמן שהוא רץ לא ניתן לעשות כלום במסך הקיים
+    {
+        timer3 = new CountDownTimer(4000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+                long sec = (l / 1000);
+                String s = String.format(Locale.getDefault(), "%2d", sec);
+                countdown3.setText(s);
+
+            }
+
+            @Override
+            public void onFinish() {
+                countdown3.setText("");
+                startTime();
+
+            }
+        }.start();
     }
     public void binPrassed(RecyclingBin b) {//פעולה המפעילה על כל פח שלחצו עליו את הפעולה ifRecycler עם הזבל שמוצג על המסך
         counter=counter+1;
@@ -220,7 +245,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 myDialog.dismiss();
                 timeLeft = seconds2 * 1000;
-                startTime();
+                start3count();
             }
         });
         restartButton.setOnClickListener(new View.OnClickListener() {
