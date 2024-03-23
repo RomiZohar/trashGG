@@ -1,6 +1,10 @@
 package com.example.trashgg;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class GameOverActivity extends AppCompatActivity {
+    TextView score;
+    Button BackHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,23 @@ public class GameOverActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+            score = findViewById(R.id.yourScore);
+            Intent gameIntent = getIntent();
+            String yourScore = gameIntent.getStringExtra(GameActivity.EXTRA_SCORE);
+            score.setText("your score:"+yourScore);
+
+            BackHome = findViewById(R.id.backHome);
+            BackHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent backToHome = new Intent(GameOverActivity.this, MainActivity.class);
+                    startActivity(backToHome);
+                }
+            });
+
+
+
             return insets;
         });
     }

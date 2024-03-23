@@ -1,5 +1,6 @@
 package com.example.trashgg;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -40,6 +41,7 @@ public class StopWindow extends AppCompatActivity {
             params.y=-20;
             getWindow().setAttributes(params);
 
+
             resumeButton = findViewById(R.id.resumeGameButton);
             restartButton = findViewById(R.id.restartGameButton);
             exitButton = findViewById(R.id.exitGameButton);
@@ -47,6 +49,15 @@ public class StopWindow extends AppCompatActivity {
             resumeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    
+
+                }
+            });
+            restartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent resumeIntant = new Intent(StopWindow.this, GameActivity.class);
+                    startActivity(resumeIntant);
 
                 }
             });
