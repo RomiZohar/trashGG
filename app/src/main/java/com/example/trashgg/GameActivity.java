@@ -1,6 +1,5 @@
 package com.example.trashgg;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.opengl.Visibility;
@@ -140,12 +139,11 @@ public class GameActivity extends AppCompatActivity {
             return insets;
         });
     }
-    public void start3count()//בזמן שהוא רץ לא ניתן לעשות כלום במסך הקיים
+    public void start3count()
     {
         timer3 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
-
                 long sec = (l / 1000);
                 String s = String.format(Locale.getDefault(), "%2d", sec);
                 countdown3.setText(s);
@@ -245,6 +243,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 myDialog.dismiss();
                 timeLeft = seconds2 * 1000;
+                count = 0;
                 start3count();
             }
         });

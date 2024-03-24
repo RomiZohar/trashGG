@@ -43,9 +43,9 @@ public class StopWindow extends AppCompatActivity {
             getWindow().setAttributes(params);
 
 
-            resumeButton = findViewById(R.id.resumeGameButton);
-            restartButton = findViewById(R.id.restartGameButton);
-            exitButton = findViewById(R.id.exitGameButton);
+            //resumeButton = findViewById(R.id.resumeGameButton);
+            //restartButton = findViewById(R.id.restartGameButton);
+            //exitButton = findViewById(R.id.exitGameButton);
 
             resumeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
