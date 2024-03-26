@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "922477110962",
+    "project_id": "trashgg-22709",
+    "storage_bucket": "trashgg-22709.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922477110962:android:7d0d3fcefa072998b40bab",
+        "android_client_info": {
+          "package_name": "com.example.trashgg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEqSvK5L_yNaJ11B2sAiBWZP15PYsIo3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
