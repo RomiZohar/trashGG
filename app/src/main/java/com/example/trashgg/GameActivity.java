@@ -214,7 +214,7 @@ public class GameActivity extends AppCompatActivity {
                         countdownTimer.setText("00");
                         String score = points.getText().toString();
                         Intent gameIntent = new Intent(GameActivity.this, GameOverActivity.class);
-                        gameIntent.putExtra(EXTRA_SCORE, score);
+                        gameIntent.putExtra(EXTRA_SCORE,score);
                         startActivity(gameIntent);
                     }
                 }
