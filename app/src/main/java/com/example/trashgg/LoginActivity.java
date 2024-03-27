@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+        Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+        v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
             mAuth = FirebaseAuth.getInstance();
             return insets;
         });
@@ -41,11 +42,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() { //פעולה הבודקת האם המשתמש כבר רשום - אם כן ישר מעבירה אותו למסך המרכזי
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }
-    }
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//           startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//       }
+   }
 
     public void register(View view) { //פעולה המאפשרת הרשמה של משתמש חדש במערכת ורושמת אותו ב-פייר בייס
         EditText emailEditText = findViewById(R.id.etEmail);
