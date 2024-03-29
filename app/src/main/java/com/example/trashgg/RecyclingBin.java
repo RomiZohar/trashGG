@@ -17,9 +17,9 @@ public class RecyclingBin extends androidx.appcompat.widget.AppCompatImageButton
 
 
 
-    public boolean ifRecycler(Garbage g)
+    public boolean ifRecycler(String g)
     {
-        return (g.getKind()).equals((this.recycle).getKind());
+        return (g).equals((this.recycle).getKind());
     }
 
 

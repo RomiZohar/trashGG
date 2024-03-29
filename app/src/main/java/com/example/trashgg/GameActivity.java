@@ -2,21 +2,32 @@ package com.example.trashgg;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.opengl.Visibility;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
@@ -31,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
     RecyclingBin purpleBin;
     RecyclingBin blueBin;
     RecyclingBin brownBin;
-    Garbage packaging;
+    Garbage plastic;
     Garbage glass;
     Garbage paper;
     Garbage organic;
@@ -40,16 +51,21 @@ public class GameActivity extends AppCompatActivity {
     TextView countdown3;
     CountDownTimer timer;
     CountDownTimer timer3;
+    int n;
     int count;
     int counter=0;
     int pointsCount=0;
-    private long timeLeft=60000;
+    private long timeLeft=30000;
     private long seconds2;
     public static boolean timeRunning = false;
 
     public static final String EXTRA_SCORE ="score";
 
     Dialog myDialog;
+    StorageReference storageReference;
+    ImageView trashV;
+
+    String[] s ;
 
 
 
@@ -61,6 +77,12 @@ public class GameActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            trashV= findViewById(R.id.trashImage);
+            s = new  String[4];
+            s[0] = "plastic";
+            s[1] = "glass";
+            s[2] = "organic";
+            s[3] = "paper";
 
 
             myDialog= new Dialog(this);
@@ -70,8 +92,8 @@ public class GameActivity extends AppCompatActivity {
             //b2 = new RecyclingBin[4];
 
             orangeBinImage = (ImageButton) findViewById(R.id.orangeBinImage);
-            packaging = new Garbage("packaging");
-            orangeBin = new  RecyclingBin(orangeBinImage,"orange", packaging);
+            plastic = new Garbage("plastic");
+            orangeBin = new  RecyclingBin(orangeBinImage,"orange", plastic);
 
 
 
@@ -96,6 +118,7 @@ public class GameActivity extends AppCompatActivity {
 
             points = findViewById(R.id.points);
             start3count();
+            setTrash();
 
 
 
@@ -159,8 +182,9 @@ public class GameActivity extends AppCompatActivity {
         }.start();
     }
     public void binPrassed(RecyclingBin b) {//פעולה המפעילה על כל פח שלחצו עליו את הפעולה ifRecycler עם הזבל שמוצג על המסך
+
         counter=counter+1;
-        if (b.ifRecycler(glass)) {
+        if (b.ifRecycler(s[n])) {
             if(counter==1)
             {
                count = count+3;
@@ -178,6 +202,7 @@ public class GameActivity extends AppCompatActivity {
             count = count -5;
             count += 1;
         }
+        setTrash();
     }
 
     public void startTime() {
@@ -291,24 +316,52 @@ public class GameActivity extends AppCompatActivity {
             startTime();
         }
     }
+    public void setTrash() {
 
+        n= ((int) (Math.random()*4));
 
+        String loc = s[n]+"/"+s[n]+"1.jpg";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        storageReference = FirebaseStorage.getInstance().getReference(loc);
+        try {
+            File localfile = File.createTempFile("tempfile", ".jpg");
+            storageReference.getFile(localfile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
+                    trashV.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(GameActivity.this, "Error", Toast.LENGTH_SHORT);
+                }
+            });
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
