@@ -21,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //FirebaseDatabase database = FirebaseDatabase.getInstance("https://trashgg-22709-default-rtdb.europe-west1.firebasedatabase.app/");
-        //DatabaseReference myRef = database.getReference("message");
-
-        //myRef.setValue("Hello, World!");
 
             Button startGameButton = findViewById(R.id.startGameButton);
             Button instructionsButton = findViewById(R.id.instructionsButton);

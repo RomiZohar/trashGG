@@ -4,23 +4,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Players {
+
         private int record;
         private String name;
+        private String email;
+        private String pass;
+        public Players(){}
 
-        public Players(String name)
+        public Players(String name,String email,String pass)
         {
             this.name=name;
+            this.email =email;
+            this.pass = pass;
             this.record = 0;
         }
-        public Players(String name, int record)
-        {
-            this.name=name;
-            this.record = record;
-        }
 
-        public void setRecord(int record) {
-            this.record = record;
-        }
+
 
         public int getRecord() {
             return record;
@@ -36,16 +35,21 @@ public class Players {
             return name;
         }
 
-        public boolean newRecord(int r)
+    public String getPass() {
+        return pass;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void newRecord(int r)
         {
             if(r>this.record)
             {
                 this.record = r;
-                return true;
             }
-            else {
-                return false;
-            }
+
         }
     }
 
