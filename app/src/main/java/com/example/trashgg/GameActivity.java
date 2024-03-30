@@ -118,7 +118,7 @@ public class GameActivity extends AppCompatActivity {
 
             points = findViewById(R.id.points);
             start3count();
-            setTrash();
+
 
 
 
@@ -176,6 +176,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 countdown3.setText("");
+                setTrash();
                 startTime();
 
             }

@@ -20,9 +20,8 @@ public class myFirebase {
     public myFirebase()
     {
         fAuth = FirebaseAuth.getInstance();
-        currentUser= fAuth .getCurrentUser();
+        currentUser= fAuth.getCurrentUser();
         db = FirebaseDatabase.getInstance("https://trashgg-22709-default-rtdb.europe-west1.firebasedatabase.app/");
-        ref = db.getReference();
     }
 
     public static FirebaseDatabase getDb() {
@@ -42,9 +41,16 @@ public class myFirebase {
     }
     public void addPlayer(Players p)
     {
-        setRef("player/"+currentUser.getUid());
-        ref= db.getReference();
+        //ref.setValue("player/"+currentUser.getUid());
+        //ref.push();
+        //setRef("player/"+currentUser.getUid());
+        //ref= db.getReference();
+        //ref.setValue(p);
+        currentUser= fAuth.getCurrentUser();
+        ref = db.getReference("player/"+currentUser.getUid());
         ref.setValue(p);
+
+
         //Players p = new Players(nikName.getText().toString(),emailEditText.getText().toString(),passwordEditText.getText().toString());
         //myFirebase f = new myFirebase();
        // f.setRef("player/"+myFirebase.getCurrentUser().getUid());
@@ -52,8 +58,7 @@ public class myFirebase {
         //d.setValue(p);romi
     }
     public void get_userNode(int r) {
-        setRef("player/" + currentUser.getUid());
-        ref = db.getReference();
+        ref = db.getReference("player/" + currentUser.getUid());
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
