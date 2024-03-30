@@ -51,11 +51,11 @@ public class GameActivity extends AppCompatActivity {
     TextView countdown3;
     CountDownTimer timer;
     CountDownTimer timer3;
-    int n;
+    int n1, n2;
     int count;
     int counter=0;
     int pointsCount=0;
-    private long timeLeft=30000;
+    private long timeLeft=60000;
     private long seconds2;
     public static boolean timeRunning = false;
 
@@ -184,7 +184,7 @@ public class GameActivity extends AppCompatActivity {
     public void binPrassed(RecyclingBin b) {//פעולה המפעילה על כל פח שלחצו עליו את הפעולה ifRecycler עם הזבל שמוצג על המסך
 
         counter=counter+1;
-        if (b.ifRecycler(s[n])) {
+        if (b.ifRecycler(s[n1])) {
             if(counter==1)
             {
                count = count+3;
@@ -318,9 +318,10 @@ public class GameActivity extends AppCompatActivity {
     }
     public void setTrash() {
 
-        n= ((int) (Math.random()*4));
+        n1 = ((int) (Math.random()*4));
+        n2 = ((int) (Math.random()*5))+1;
 
-        String loc = s[n]+"/"+s[n]+"1.jpg";
+        String loc = s[n1]+"/"+s[n1]+n2+".jpg";
 
         storageReference = FirebaseStorage.getInstance().getReference(loc);
         try {
