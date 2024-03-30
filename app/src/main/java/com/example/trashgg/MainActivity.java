@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
             Button startGameButton = findViewById(R.id.startGameButton);
             Button instructionsButton = findViewById(R.id.instructionsButton);
+            Button leaderboardButton = findViewById(R.id.leaderboardButton);
 
 
 
@@ -47,7 +48,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            leaderboardButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,LeaderBoardActivity.class));
+                }
+            });
+
             // Set onClickListener for Chart Button
+
 
 
     }

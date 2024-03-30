@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class myFirebase {
     private static FirebaseUser currentUser;
     private static FirebaseAuth fAuth;
@@ -76,6 +78,28 @@ public class myFirebase {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+    }
+    public void cList(ArrayList<Players> list,MyAdapter myAdapter)
+    {
+        ref = db.getReference("player/");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    Players players = dataSnapshot.getValue(Players.class);
+                    list.add(players);
+                }
+                myAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
         });
     }
 }
