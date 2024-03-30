@@ -3,7 +3,7 @@ package com.example.trashgg;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Players {
+public class Players implements Comparable<Players>{
 
         private int record;
         private String name;
@@ -51,5 +51,12 @@ public class Players {
             }
 
         }
+
+
+    @Override
+    public int compareTo(Players o) {
+            return this.record>o.record ? 1 :(this.record<o.record ? -1: 0);
+
     }
+}
 

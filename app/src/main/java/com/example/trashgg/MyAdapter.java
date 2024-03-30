@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         Players players = list.get(position);
         holder.nikName.setText(players.getName());
         holder.score.setText(String.valueOf(players.getRecord()));
-        holder.placement.setText(String.valueOf(position));
+        holder.placement.setText(String.valueOf(position+1));
 
     }
 
