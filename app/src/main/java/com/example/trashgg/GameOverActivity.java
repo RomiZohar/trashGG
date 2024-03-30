@@ -28,11 +28,8 @@ public class GameOverActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_game_over);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
 
             myFirebase f1 = new myFirebase() ;
             score = findViewById(R.id.yourScore);
@@ -54,7 +51,7 @@ public class GameOverActivity extends AppCompatActivity {
 
 
 
-            return insets;
-        });
+
+
     }
 }
