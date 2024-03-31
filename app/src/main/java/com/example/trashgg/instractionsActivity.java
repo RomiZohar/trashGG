@@ -24,14 +24,14 @@ public class instractionsActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button backHomeButton = findViewById(R.id.backHomeButton);
+        //Button backHomeButton = findViewById(R.id.backHomeButton);
 
-        backHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent backHomeIntent = new Intent(instractionsActivity.this , MainActivity.class);
-                startActivity(backHomeIntent);
-            }
-        });
+       // backHomeButton.setOnClickListener(new View.OnClickListener() {
+            //@Override
+         //   public void onClick(View view) {
+            //    Intent backHomeIntent = new Intent(instractionsActivity.this , MainActivity.class);
+             //   startActivity(backHomeIntent);
+          //  }
+       // });
     }
 }

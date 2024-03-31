@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
             Button startGameButton = findViewById(R.id.startGameButton);
             Button instructionsButton = findViewById(R.id.instructionsButton);
             Button leaderboardButton = findViewById(R.id.leaderboardButton);
-            //Button selectTime = findViewById(R.id.selectTime);
-            //Button setAlarm = findViewById(R.id.setAlarm);
-            //Button cancelAlarm = findViewById(R.id.cancelAlarm);
+            Button selectTime = findViewById(R.id.selectTime);
+            ImageButton setAlarm = findViewById(R.id.setAlarm);
+            ImageButton cancelAlarm = findViewById(R.id.cancelAlarm);
 
 
 
