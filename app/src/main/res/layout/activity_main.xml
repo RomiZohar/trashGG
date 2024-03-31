@@ -53,6 +53,42 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="Leaderboard" />
+
+        <Button
+            android:id="@+id/setAlarm"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leaderboardButton"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="147dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="214dp"
+            app:icon="@drawable/ic_notification" />
+
+        <Button
+            android:id="@+id/selectTime"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leaderboardButton"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="146dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="139dp"
+            android:text="select Time" />
+
+        <Button
+            android:id="@+id/cancelAlarm"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selectTime"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="141dp"
+            app:icon="@android:drawable/presence_busy" />
+
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
