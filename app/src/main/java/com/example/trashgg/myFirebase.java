@@ -68,7 +68,6 @@ public class myFirebase {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 Players p = snapshot.getValue(Players.class);
                 p.newRecord(r);
                 ref.setValue(p);

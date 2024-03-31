@@ -1,6 +1,7 @@
 package com.example.trashgg;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
             recyclerView.setAdapter(myAdapter);
             myFirebase mf = new myFirebase();
             mf.cList(list,myAdapter);
+
+
 
 
 

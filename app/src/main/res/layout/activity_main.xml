@@ -2,18 +2,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
+    android:background="#FFAA2B"
     tools:context=".">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_launcher_background"
+        android:backgroundTint="#C58527"
         tools:context=".MainActivity"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
+
+        <ImageButton
+            android:id="@+id/cancelAlarm"
+            android:layout_width="56dp"
+            android:layout_height="53dp"
+            android:layout_below="@+id/selectTime"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="144dp"
+            android:backgroundTint="#FFAA2B"
+            android:scaleType="centerCrop"
+            android:scrollbarSize="60dp"
+            android:src="@android:drawable/presence_busy" />
 
         <TextView
             android:id="@+id/appTitle"
@@ -21,7 +35,11 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:outlineAmbientShadowColor="@color/black"
+            android:outlineProvider="bounds"
+            android:outlineSpotShadowColor="@color/black"
             android:text="TrashG"
+            android:textColor="#FFFFFF"
             android:textSize="96sp"
             android:textStyle="bold" />
 
@@ -55,18 +73,6 @@
             android:text="Leaderboard" />
 
         <Button
-            android:id="@+id/setAlarm"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/leaderboardButton"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="147dp"
-            android:layout_marginTop="75dp"
-            android:layout_marginEnd="214dp"
-            app:icon="@drawable/ic_notification" />
-
-        <Button
             android:id="@+id/selectTime"
             android:layout_width="126dp"
             android:layout_height="wrap_content"
@@ -76,17 +82,21 @@
             android:layout_marginStart="146dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="139dp"
-            android:text="select Time" />
+            android:text="select Time"
+            app:icon="@android:drawable/ic_lock_idle_alarm" />
 
-        <Button
-            android:id="@+id/cancelAlarm"
-            android:layout_width="60dp"
+        <ImageButton
+            android:id="@+id/setAlarm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selectTime"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="141dp"
-            app:icon="@android:drawable/presence_busy" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/cancelAlarm"
+            android:backgroundTint="#FFAA2B"
+            android:src="@android:drawable/ic_popup_reminder" />
 
 
     </RelativeLayout>

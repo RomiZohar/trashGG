@@ -16,16 +16,19 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent nextActivity = new Intent(context, NotificationActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, nextActivity, PendingIntent.FLAG_IMMUTABLE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "androidknowledge")
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle("TrashGG")
-                .setContentText("The scoreboard has changed!, go to the app and check your updated placement")
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(123, (builder.build()));
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "androidknowledge")
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle("TrashGG")
+                    .setContentText("The scoreboard has changed!, go to the app and check your updated placement")
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setContentIntent(pendingIntent);
+
+
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+            notificationManagerCompat.notify(123, (builder.build()));
+
     }
 }

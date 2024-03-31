@@ -45,9 +45,13 @@ public class MainActivity extends AppCompatActivity {
             Button startGameButton = findViewById(R.id.startGameButton);
             Button instructionsButton = findViewById(R.id.instructionsButton);
             Button leaderboardButton = findViewById(R.id.leaderboardButton);
-            Button selectTime = findViewById(R.id.selectTime);
-            Button setAlarm = findViewById(R.id.setAlarm);
-            Button cancelAlarm = findViewById(R.id.cancelAlarm);
+            //Button selectTime = findViewById(R.id.selectTime);
+            //Button setAlarm = findViewById(R.id.setAlarm);
+            //Button cancelAlarm = findViewById(R.id.cancelAlarm);
+
+
+
+
 
 
 
